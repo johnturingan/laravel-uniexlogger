@@ -85,9 +85,13 @@ class Handler extends ExceptionHandler
             return $this->renderHttpException($e);
         }
 
-        return response()->view('errors.'.$e->getCode(), [
-            'message' => $e->getMessage()
-        ], 200);
+        if (view()->exists("errors.{$e->getCode()}")) {
+
+            return response()->view("errors.{$e->getCode()}", [ 'message' => $e->getMessage() ], 200);
+
+        }
+
+        return $this->convertExceptionToResponse($e);
 
     }
 
