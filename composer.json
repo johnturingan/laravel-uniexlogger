@@ -1,0 +1,46 @@
+{
+    "name": "johnturingan/laravel-uniexlogger",
+    "description": "Unified Exception and Logging Manager for Laravel using Graylog Gelf UdpTransport",
+    "keywords": [
+        "laravel",
+        "logging",
+        "gelf",
+        "UdbTransport",
+        "graylog"
+    ],
+    "homepage": "https://github.com/johnturingan/laravel-uniexlogger",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "John Turingan",
+            "email": "john.turingan@gmail.com",
+            "homepage": "https://github.com/johnturingan",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "graylog2/gelf-php": "1.4.*",
+        "monolog/monolog":"1.13.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*",
+        "mockery/mockery": "0.9.*",
+        "illuminate/auth": "~5.0",
+        "illuminate/database": "~5.0",
+        "illuminate/console" : "~5.0"
+    },
+    "autoload": {
+        "files" : [
+            "src/helpers/array_helpers.php"
+        ],
+        "psr-4": {
+            "UniExLogger\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "UniExLogger\\Test\\": "tests"
+        }
+    }
+}
