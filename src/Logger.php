@@ -112,6 +112,6 @@ class Logger implements ILogger
         $data[$cp . '.requestData'] = $info->getRequestData();
         $data[$cp . '.headers'] = $info->getHeaders();
 
-        $this->monolog->critical( $prefix . ': ' . $info->getMessage(), $data );
+        $this->monolog->info( $prefix . ': ' . $info->getMessage(), $data );
     }
 }
