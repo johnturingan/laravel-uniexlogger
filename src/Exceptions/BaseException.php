@@ -25,6 +25,12 @@ abstract class BaseException extends \Exception
     protected $statusCode = 500;
 
     /**
+     * Application where it throws exception
+     * @var string
+     */
+    protected $appFault;
+
+    /**
      * Prefix that will be add to the message for easy indexing
      * @var string
      */
@@ -79,6 +85,25 @@ abstract class BaseException extends \Exception
         $this->setMessage($message);
 
         parent::__construct($message, $code, $previous);
+    }
+
+    /**
+     * @return string
+     */
+    public function getAppFault(): string
+    {
+        return $this->appFault;
+    }
+
+    /**
+     * @param string $appFault
+     * @return $this
+     */
+    public function setAppFault(string $appFault)
+    {
+        $this->appFault = $appFault;
+
+        return $this;
     }
 
     /**
