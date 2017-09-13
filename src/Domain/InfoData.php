@@ -173,7 +173,7 @@ class InfoData
     public function setHeaders($headers)
     {
 
-        $this->headers = $headers;
+        $this->headers = (array) $headers;
 
         return $this;
     }
