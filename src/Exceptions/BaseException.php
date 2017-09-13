@@ -90,7 +90,7 @@ abstract class BaseException extends \Exception
     /**
      * @return string
      */
-    public function getAppFault(): string
+    public function getAppFault()
     {
         return $this->appFault;
     }
