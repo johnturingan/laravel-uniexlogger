@@ -10,6 +10,7 @@ namespace UniExLogger;
 
 use Gelf\Publisher;
 use Gelf\Transport\UdpTransport;
+use Psr\Log\LoggerInterface;
 use UniExLogger\Domain\InfoData;
 use UniExLogger\Exceptions\BaseException as PromBaseException;
 use Monolog\Handler\GelfHandler;
@@ -40,20 +41,27 @@ class Logger implements ILogger
     function __construct()
     {
 
-        $transport = new UdpTransport(
-            config('prom-log.graylog_host'),
-            config('prom-log.graylog_port'),
-            UdpTransport::CHUNK_MAX_COUNT
-        );
-
         $this->contextPrefix = config('prom-log.context_prefix');
 
-        $publisher = new Publisher($transport);
-        $gelfHandler = new GelfHandler($publisher);
+        $this->log = app(LoggerInterface::class);
 
-        $this->log = \Log::getMonolog();
+        if (! config('app.debug')) {
 
-        $this->log->pushHandler($gelfHandler);
+
+            $transport = new UdpTransport(
+                config('prom-log.graylog_host'),
+                config('prom-log.graylog_port'),
+                UdpTransport::CHUNK_MAX_COUNT
+            );
+
+            $publisher = new Publisher($transport);
+            $gelfHandler = new GelfHandler($publisher);
+
+            $this->log = \Log::getMonolog();
+
+            $this->log->pushHandler($gelfHandler);
+
+        }
     }
 
 
@@ -69,6 +77,7 @@ class Logger implements ILogger
         $cp = $this->contextPrefix;
 
         $data = [];
+        $data[$cp . '.appFault'] = $e->getAppFault();
         $data[$cp . '.code'] = $e->getCode();
         $data[$cp . '.url'] = $e->getUrl();
         $data[$cp . '.domain'] = $e->getDomain();

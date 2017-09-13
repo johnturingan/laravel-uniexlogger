@@ -58,7 +58,7 @@ abstract class BaseException extends \Exception
      * Request Data of the current request
      * @var array
      */
-    protected $requestData;
+    protected $requestData = [];
 
     /**
      * Headers of the current request
