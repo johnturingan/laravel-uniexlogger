@@ -8,6 +8,8 @@
 
 namespace UniExLogger\Domain;
 
+use Illuminate\Http\Request;
+
 /**
  * Class InfoData
  */
@@ -39,12 +41,6 @@ class InfoData
     protected $requestData = [];
 
     /**
-     * Headers of the current request
-     * @var array
-     */
-    protected $headers = [];
-
-    /**
      * Custom code for info
      * @var int
      */
@@ -56,8 +52,20 @@ class InfoData
      */
     protected $message;
 
+    /**
+     * @var Request
+     */
+    private $request;
 
 
+    /**
+     * InfoData constructor.
+     */
+    function __construct()
+    {
+
+        $this->request = app(Request::class);
+    }
 
 
     /**
@@ -141,18 +149,25 @@ class InfoData
      */
     public function getHeaders(): array
     {
-        return $this->headers;
-    }
 
-    /**
-     * @param array $headers
-     * @return $this
-     */
-    public function setHeaders(array $headers)
-    {
-        $this->headers = $headers;
+        $reqHeaders = config('uniexlogger.request_headers');
 
-        return $this;
+        $headers = [];
+
+        foreach ($reqHeaders as $header) {
+
+            $value = $this->request->header($header);
+
+            if ($value) {
+
+                $headers[$header] = $this->request->header($header);
+
+            }
+
+        }
+
+        return $headers;
+
     }
 
     /**

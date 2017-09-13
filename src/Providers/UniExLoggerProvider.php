@@ -23,7 +23,7 @@ class UniExLoggerProvider extends ServiceProvider
     public function boot ()
     {
         $this->publishes([
-            __DIR__.'/../config/config.php' => config_path('prom-log.php'),
+            __DIR__.'/../config/config.php' => config_path('uniexlogger.php'),
         ], 'config');
 
     }
@@ -41,7 +41,7 @@ class UniExLoggerProvider extends ServiceProvider
             Logger::class
         );
 
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'prom-log');
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'uniexlogger');
 
     }
 }

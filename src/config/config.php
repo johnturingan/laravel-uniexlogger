@@ -55,5 +55,17 @@ return [
     'graylog_port' => env('PROM_GRAYLOG_PORT', 12197),
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | Request Headers
+    |--------------------------------------------------------------------------
+    |
+    | Specify the list of request headers that will be included
+    |
+    */
+    'request_headers' => [
+        'Authorization',
+        'Accept-Language'
+    ],
 
 ];

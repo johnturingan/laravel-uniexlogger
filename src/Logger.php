@@ -41,7 +41,7 @@ class Logger implements ILogger
     function __construct()
     {
 
-        $this->contextPrefix = config('prom-log.context_prefix');
+        $this->contextPrefix = config('uniexlogger.context_prefix');
 
         $this->log = app(LoggerInterface::class);
 
@@ -49,8 +49,8 @@ class Logger implements ILogger
 
 
             $transport = new UdpTransport(
-                config('prom-log.graylog_host'),
-                config('prom-log.graylog_port'),
+                config('uniexlogger.graylog_host'),
+                config('uniexlogger.graylog_port'),
                 UdpTransport::CHUNK_MAX_COUNT
             );
 
@@ -97,7 +97,7 @@ class Logger implements ILogger
     public function info(InfoData $info)
     {
 
-        $prefix = config('prom-log.prefix');
+        $prefix = config('uniexlogger.prefix');
 
         $cp = $this->contextPrefix;
 
