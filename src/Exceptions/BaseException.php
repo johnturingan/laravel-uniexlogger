@@ -28,7 +28,7 @@ abstract class BaseException extends \Exception
      * Application where it throws exception
      * @var string
      */
-    protected $appFault;
+    protected $appFault = null;
 
     /**
      * Prefix that will be add to the message for easy indexing
@@ -80,7 +80,7 @@ abstract class BaseException extends \Exception
             $code = $this->statusCode;
         }
 
-        $this->prefix = config('prom-log.prefix');
+        $this->prefix = $this->prefix ?? config('prom-log.prefix');
 
         $this->setMessage($message);
 
@@ -99,7 +99,7 @@ abstract class BaseException extends \Exception
      * @param string $appFault
      * @return $this
      */
-    public function setAppFault(string $appFault)
+    public function setAppFault($appFault)
     {
         $this->appFault = $appFault;
 
