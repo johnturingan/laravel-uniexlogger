@@ -9,7 +9,6 @@
 namespace UniExLogger\Exceptions;
 
 
-use Illuminate\Http\Request;
 use Throwable;
 
 /**
@@ -61,11 +60,11 @@ abstract class BaseException extends \Exception
      */
     protected $requestData = [];
 
-
     /**
-     * @var Request
+     * List or headers
+     * @var array
      */
-    private $request;
+    protected $headers = [];
 
 
     /**
@@ -80,8 +79,6 @@ abstract class BaseException extends \Exception
         if (is_null($code)) {
             $code = $this->statusCode;
         }
-
-        $this->request = app(Request::class);
 
         $this->prefix = $this->prefix ?? config('uniexlogger.prefix');
 
@@ -205,6 +202,7 @@ abstract class BaseException extends \Exception
         return $this;
     }
 
+
     /**
      * @return array
      */
@@ -217,11 +215,9 @@ abstract class BaseException extends \Exception
 
         foreach ($reqHeaders as $header) {
 
-            $value = $this->request->header($header);
+            if (isset($this->headers[$header])) {
 
-            if ($value) {
-
-                $headers[$header] = $this->request->header($header);
+                $headers[$header] = $this->headers[$header];
 
             }
 
@@ -229,6 +225,18 @@ abstract class BaseException extends \Exception
 
         return $headers;
 
+    }
+
+    /**
+     * @param $headers
+     * @return $this
+     */
+    public function setHeaders($headers)
+    {
+
+        $this->headers = $headers;
+
+        return $this;
     }
 
     /**

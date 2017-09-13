@@ -41,6 +41,12 @@ class InfoData
     protected $requestData = [];
 
     /**
+     * List or headers
+     * @var array
+     */
+    protected $headers = [];
+
+    /**
      * Custom code for info
      * @var int
      */
@@ -58,14 +64,6 @@ class InfoData
     private $request;
 
 
-    /**
-     * InfoData constructor.
-     */
-    function __construct()
-    {
-
-        $this->request = app(Request::class);
-    }
 
 
     /**
@@ -156,11 +154,9 @@ class InfoData
 
         foreach ($reqHeaders as $header) {
 
-            $value = $this->request->header($header);
+            if (isset($this->headers[$header])) {
 
-            if ($value) {
-
-                $headers[$header] = $this->request->header($header);
+                $headers[$header] = $this->headers[$header];
 
             }
 
@@ -168,6 +164,18 @@ class InfoData
 
         return $headers;
 
+    }
+
+    /**
+     * @param $headers
+     * @return $this
+     */
+    public function setHeaders($headers)
+    {
+
+        $this->headers = $headers;
+
+        return $this;
     }
 
     /**
