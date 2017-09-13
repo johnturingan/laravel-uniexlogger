@@ -111,7 +111,7 @@ abstract class BaseException extends \Exception
      */
     public function getPrefix(): string
     {
-        return $this->url;
+        return $this->prefix;
     }
 
     /**
