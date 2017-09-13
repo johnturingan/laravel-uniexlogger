@@ -29,24 +29,9 @@ class Logger implements ILogger
     protected $contextPrefix;
 
     /**
-     * @var \Gelf\Transport\UdpTransport
-     */
-    protected $transport;
-
-    /**
-     * @var Publisher
-     */
-    protected $publisher;
-
-    /**
-     * @var GelfHandler
-     */
-    protected $gelfHandler;
-
-    /**
      * @var Monolog
      */
-    private $monolog;
+    private $log;
 
 
     /**
@@ -55,7 +40,7 @@ class Logger implements ILogger
     function __construct()
     {
 
-        $this->transport = new UdpTransport(
+        $transport = new UdpTransport(
             config('prom-log.graylog_host'),
             config('prom-log.graylog_port'),
             UdpTransport::CHUNK_MAX_COUNT
@@ -63,12 +48,12 @@ class Logger implements ILogger
 
         $this->contextPrefix = config('prom-log.context_prefix');
 
-        $this->publisher = new Publisher($this->transport);
-        $this->gelfHandler = new GelfHandler($this->publisher);
+        $publisher = new Publisher($transport);
+        $gelfHandler = new GelfHandler($publisher);
 
-        $this->monolog = \Log::getMonolog();
+        $this->log = \Log::getMonolog();
 
-        $this->monolog->pushHandler($this->gelfHandler);
+        $this->log->pushHandler($gelfHandler);
     }
 
 
@@ -90,7 +75,9 @@ class Logger implements ILogger
         $data[$cp . '.requestData'] = $e->getRequestData();
         $data[$cp . '.headers'] = $e->getHeaders();
 
-        $this->monolog->critical( $prefix . ': ' . $e->getMessage(), $data );
+        try {
+            $this->log->critical( $prefix . ': ' . $e->getMessage(), $data );
+        } catch (\Exception $e) {}
 
     }
 
@@ -112,6 +99,8 @@ class Logger implements ILogger
         $data[$cp . '.requestData'] = $info->getRequestData();
         $data[$cp . '.headers'] = $info->getHeaders();
 
-        $this->monolog->info( $prefix . ': ' . $info->getMessage(), $data );
+        try {
+            $this->log->info( $prefix . ': ' . $info->getMessage(), $data );
+        } catch (\Exception $e) {}
     }
 }
