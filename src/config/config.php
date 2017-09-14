@@ -68,4 +68,13 @@ return [
         'Accept-Language'
     ],
 
+    'should_log' => [
+        'UniExLogger\Exceptions\HttpClientException' => env('UNIEXLOG_HTTPCLIENT_ENABLED', 1),
+        'UniExLogger\Exceptions\MaintenanceException' => env('UNIEXLOG_MAINTENANCE_ENABLED', 1),
+        'UniExLogger\Exceptions\SiteConfigurationException' => env('UNIEXLOG_HTTPCLIENT_ENABLED', 1),
+        'UniExLogger\Exceptions\TokenExpiredException' => env('UNIEXLOG_HTTPCLIENT_ENABLED', 1),
+        'UniExLogger\Exceptions\TokenInvalidException' => env('UNIEXLOG_HTTPCLIENT_ENABLED', 1),
+        'UniExLogger\Exceptions\CacheUpdateException' => env('UNIEXLOG_HTTPCLIENT_ENABLED', 1),
+    ]
+
 ];

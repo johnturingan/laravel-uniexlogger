@@ -73,20 +73,24 @@ class Logger implements ILogger
     public function exception(PromBaseException $e)
     {
 
-        $prefix = $e->getPrefix();
-        $cp = $this->contextPrefix;
+        if ($this->shouldLog($e)) {
 
-        $data = [];
-        $data[$cp . '.appFault'] = $e->getAppFault();
-        $data[$cp . '.code'] = $e->getCode();
-        $data[$cp . '.url'] = $e->getUrl();
-        $data[$cp . '.domain'] = $e->getDomain();
-        $data[$cp . '.requestData'] = $e->getRequestData();
-        $data[$cp . '.headers'] = $e->getHeaders();
+            $prefix = $e->getPrefix();
+            $cp = $this->contextPrefix;
 
-        try {
-            $this->log->critical( $prefix . ': ' . $e->getMessage(), $data );
-        } catch (\Exception $e) {}
+            $data = [];
+            $data[$cp . '.appFault'] = $e->getAppFault();
+            $data[$cp . '.code'] = $e->getCode();
+            $data[$cp . '.url'] = $e->getUrl();
+            $data[$cp . '.domain'] = $e->getDomain();
+            $data[$cp . '.requestData'] = $e->getRequestData();
+            $data[$cp . '.headers'] = $e->getHeaders();
+
+            try {
+                $this->log->critical( $prefix . ': ' . $e->getMessage(), $data );
+            } catch (\Exception $e) {}
+
+        }
 
     }
 
@@ -112,4 +116,29 @@ class Logger implements ILogger
             $this->log->info( $prefix . ': ' . $info->getMessage(), $data );
         } catch (\Exception $e) {}
     }
+
+    /**
+     * @param PromBaseException $e
+     * @return bool
+     */
+    private function shouldLog(PromBaseException $e)
+    {
+
+        $should_log_namespace = config('uniexlogger.should_log');
+
+        foreach ($should_log_namespace as $ns => $value) {
+
+            if(($e instanceof $ns) && $value === 0 )
+            {
+
+                return false;
+
+                break;
+            }
+
+        }
+
+        return true;
+    }
+
 }
