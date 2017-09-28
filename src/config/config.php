@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'graylog_host' => env('PROM_GRAYLOG_HOST', 'localhost'),
+    'graylog_host' => env('PROM_GRAYLOG_HOST', '8.8.8.8'),
 
     /*
     |--------------------------------------------------------------------------
