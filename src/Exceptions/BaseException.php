@@ -209,7 +209,7 @@ abstract class BaseException extends \Exception
     public function getHeaders(): array
     {
 
-        $reqHeaders = config('uniexlogger.request_headers');
+        $reqHeaders = config('uniexlogger.request_headers', []);
 
         $headers = [];
 
