@@ -124,7 +124,7 @@ class Logger implements ILogger
     private function shouldLog(PromBaseException $e)
     {
 
-        $should_log_namespace = config('uniexlogger.should_log');
+        $should_log_namespace = config('uniexlogger.should_log', []);
 
         foreach ($should_log_namespace as $ns => $value) {
 
