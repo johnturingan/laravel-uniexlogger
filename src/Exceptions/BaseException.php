@@ -66,6 +66,10 @@ abstract class BaseException extends \Exception
      */
     protected $headers = [];
 
+    /**
+     * @var bool
+     */
+    protected $loggable = false;
 
     /**
      * BaseException constructor.
@@ -262,4 +266,24 @@ abstract class BaseException extends \Exception
         return $this;
 
     }
+
+    /**
+     * @return bool
+     */
+    public function shouldLog()
+    {
+        return $this->loggable;
+    }
+
+    /**
+     * @param $bool
+     * @return $this
+     */
+    public function ableLog($bool)
+    {
+        $this->loggable = $bool;
+
+        return $this;
+    }
+
 }
