@@ -113,7 +113,7 @@ abstract class BaseException extends \Exception
     /**
      * @return string
      */
-    public function getPrefix(): string
+    public function getPrefix(): ?string
     {
         return $this->prefix;
     }
@@ -133,7 +133,7 @@ abstract class BaseException extends \Exception
     /**
      * @return string
      */
-    public function getUrl(): string
+    public function getUrl(): ?string
     {
         return $this->url;
     }
@@ -152,7 +152,7 @@ abstract class BaseException extends \Exception
     /**
      * @return string
      */
-    public function getDomain(): string
+    public function getDomain(): ?string
     {
         return $this->domain;
     }
@@ -171,7 +171,7 @@ abstract class BaseException extends \Exception
     /**
      * @return string
      */
-    public function getLanguage(): string
+    public function getLanguage(): ?string
     {
         return $this->language;
     }
