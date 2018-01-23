@@ -122,7 +122,7 @@ abstract class BaseException extends \Exception
      * @param string $prefix
      * @return $this
      */
-    public function setPrefix(string $prefix)
+    public function setPrefix(?string $prefix)
     {
         $this->prefix = $prefix;
 
@@ -142,7 +142,7 @@ abstract class BaseException extends \Exception
      * @param string $url
      * @return $this
      */
-    public function setUrl(string $url)
+    public function setUrl(?string $url)
     {
         $this->url = $url;
 
@@ -161,7 +161,7 @@ abstract class BaseException extends \Exception
      * @param string $domain
      * @return $this
      */
-    public function setDomain(string $domain)
+    public function setDomain(?string $domain)
     {
         $this->domain = $domain;
 
@@ -180,7 +180,7 @@ abstract class BaseException extends \Exception
      * @param string $language
      * @return $this
      */
-    public function setLanguage(string $language)
+    public function setLanguage(?string $language)
     {
         $this->language = $language;
 
@@ -247,7 +247,7 @@ abstract class BaseException extends \Exception
      * @param string $message
      * @return $this
      */
-    public function setMessage(string $message)
+    public function setMessage(?string $message)
     {
         $this->message = $message;
 
