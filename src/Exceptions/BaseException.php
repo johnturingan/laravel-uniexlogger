@@ -10,6 +10,7 @@ namespace UniExLogger\Exceptions;
 
 
 use Throwable;
+use UniExLogger\ILogger;
 
 /**
  * Class BaseException
@@ -17,6 +18,11 @@ use Throwable;
  */
 abstract class BaseException extends \Exception
 {
+
+    /**
+     * @var string
+     */
+    protected $id;
 
     /**
      * Default StatusCode
@@ -89,6 +95,25 @@ abstract class BaseException extends \Exception
         $this->setMessage($message);
 
         parent::__construct($message, $code, $previous);
+    }
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param $id
+     * @return $this
+     */
+    public function setId ($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
@@ -284,6 +309,20 @@ abstract class BaseException extends \Exception
         $this->loggable = $bool;
 
         return $this;
+    }
+
+    /**
+     * Log type
+     */
+    public function report()
+    {
+        /**
+         * @var $logger ILogger
+         */
+        $logger = app(ILogger::class);
+
+        $logger->exception($this);
+
     }
 
 }

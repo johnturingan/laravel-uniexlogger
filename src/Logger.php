@@ -79,6 +79,7 @@ class Logger implements ILogger
             $cp = $this->contextPrefix;
 
             $data = [];
+            $data[$cp . '.id'] = $e->getId();
             $data[$cp . '.appFault'] = $e->getAppFault();
             $data[$cp . '.code'] = $e->getCode();
             $data[$cp . '.url'] = $e->getUrl();
@@ -106,6 +107,7 @@ class Logger implements ILogger
         $cp = $this->contextPrefix;
 
         $data = [];
+        $data[$cp . '.id'] = $info->getId();
         $data[$cp . '.code'] = $info->getCode();
         $data[$cp . '.url'] = $info->getUrl();
         $data[$cp . '.domain'] = $info->getDomain();

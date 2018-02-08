@@ -17,6 +17,11 @@ class InfoData
 {
 
     /**
+     * @var string
+     */
+    protected $id;
+
+    /**
      * Url of the current request
      * @var string
      */
@@ -64,6 +69,25 @@ class InfoData
     private $request;
 
 
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param $id
+     * @return $this
+     */
+    public function setId ($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
 
     /**
