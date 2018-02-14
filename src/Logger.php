@@ -47,19 +47,22 @@ class Logger implements ILogger
 
         if (! config('app.debug')) {
 
+            try {
 
-            $transport = new UdpTransport(
-                config('uniexlogger.graylog_host'),
-                config('uniexlogger.graylog_port'),
-                UdpTransport::CHUNK_MAX_COUNT
-            );
+                $transport = new UdpTransport(
+                    config('uniexlogger.graylog_host'),
+                    config('uniexlogger.graylog_port'),
+                    UdpTransport::CHUNK_MAX_COUNT
+                );
 
-            $publisher = new Publisher($transport);
-            $gelfHandler = new GelfHandler($publisher);
+                $publisher = new Publisher($transport);
+                $gelfHandler = new GelfHandler($publisher);
 
-            $this->log = \Log::getMonolog();
+                $this->log = \Log::getMonolog();
 
-            $this->log->pushHandler($gelfHandler);
+                $this->log->pushHandler($gelfHandler);
+
+            } catch (\Exception $e) {}
 
         }
     }
