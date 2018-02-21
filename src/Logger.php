@@ -45,7 +45,7 @@ class Logger implements ILogger
 
         $this->log = app(LoggerInterface::class);
 
-        if (! config('app.debug')) {
+        if (! config('app.debug') && ! str_contains(app()->version(), '5.6')) {
 
             try {
 
