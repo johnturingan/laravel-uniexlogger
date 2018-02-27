@@ -24,6 +24,11 @@ class InfoData
     /**
      * @var string
      */
+    protected $userId;
+
+    /**
+     * @var string
+     */
     protected $sessionId;
 
     /**
@@ -91,6 +96,25 @@ class InfoData
     public function setId ($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @param $id
+     * @return $this
+     */
+    public function setUserId ($id)
+    {
+        $this->userId = $id;
 
         return $this;
     }

@@ -112,6 +112,7 @@ class Logger implements ILogger
 
         $data = [];
         $data[$cp . '.id'] = $info->getId();
+        $data[$cp . '.userId'] = $info->getUserId();
         $data[$cp . '.sessionId'] = $info->getSessionId();
         $data[$cp . '.code'] = $info->getCode();
         $data[$cp . '.url'] = $info->getUrl();
