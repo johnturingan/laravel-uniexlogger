@@ -22,6 +22,11 @@ class InfoData
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $sessionId;
+
+    /**
      * Url of the current request
      * @var string
      */
@@ -70,6 +75,7 @@ class InfoData
 
 
 
+
     /**
      * @return string
      */
@@ -85,6 +91,25 @@ class InfoData
     public function setId ($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSessionId()
+    {
+        return $this->sessionId;
+    }
+
+    /**
+     * @param $id
+     * @return $this
+     */
+    public function setSessionId ($id)
+    {
+        $this->sessionId = $id;
 
         return $this;
     }

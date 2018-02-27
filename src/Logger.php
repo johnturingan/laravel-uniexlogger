@@ -83,6 +83,7 @@ class Logger implements ILogger
 
             $data = [];
             $data[$cp . '.id'] = $e->getId();
+            $data[$cp . '.sessionId'] = $e->getSessionId();
             $data[$cp . '.appFault'] = $e->getAppFault();
             $data[$cp . '.code'] = $e->getCode();
             $data[$cp . '.url'] = $e->getUrl();
@@ -111,6 +112,7 @@ class Logger implements ILogger
 
         $data = [];
         $data[$cp . '.id'] = $info->getId();
+        $data[$cp . '.sessionId'] = $info->getSessionId();
         $data[$cp . '.code'] = $info->getCode();
         $data[$cp . '.url'] = $info->getUrl();
         $data[$cp . '.domain'] = $info->getDomain();

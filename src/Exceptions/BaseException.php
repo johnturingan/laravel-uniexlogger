@@ -25,6 +25,11 @@ abstract class BaseException extends \Exception
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $sessionId;
+
+    /**
      * Default StatusCode
      * @var int
      */
@@ -97,6 +102,7 @@ abstract class BaseException extends \Exception
         parent::__construct($message, $code, $previous);
     }
 
+
     /**
      * @return string
      */
@@ -115,6 +121,27 @@ abstract class BaseException extends \Exception
 
         return $this;
     }
+
+
+    /**
+     * @return string
+     */
+    public function getSessionId()
+    {
+        return $this->sessionId;
+    }
+
+    /**
+     * @param $id
+     * @return $this
+     */
+    public function setSessionId ($id)
+    {
+        $this->sessionId = $id;
+
+        return $this;
+    }
+
 
     /**
      * @return string
