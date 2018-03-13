@@ -44,6 +44,18 @@ class InfoData
     protected $domain;
 
     /**
+     * Client IP address
+     * @var string
+     */
+    protected $ip;
+
+    /**
+     * Client Platform used
+     * @var string
+     */
+    protected $platform;
+
+    /**
      * Site Localization if necessary
      * @var string
      */
@@ -72,13 +84,6 @@ class InfoData
      * @var string
      */
     protected $message;
-
-    /**
-     * @var Request
-     */
-    private $request;
-
-
 
 
     /**
@@ -173,6 +178,44 @@ class InfoData
     public function setDomain(string $domain)
     {
         $this->domain = $domain;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIp(): ?string
+    {
+        return $this->ip;
+    }
+
+    /**
+     * @param null|string $ip
+     * @return $this
+     */
+    public function setIp(?string $ip)
+    {
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlatform(): ?string
+    {
+        return $this->platform;
+    }
+
+    /**
+     * @param null|string $platform
+     * @return $this
+     */
+    public function setPlatform(?string $platform)
+    {
+        $this->platform = $platform;
 
         return $this;
     }

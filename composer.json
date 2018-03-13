@@ -1,7 +1,7 @@
 {
     "name": "johnturingan/laravel-uniexlogger",
-    "version": "v1.0.9",
-    "description": "Unified Exception and Logging Manager for Laravel using Graylog Gelf UdpTransport",
+    "version": "v1.0.10",
+    "description": "Unified Exception and Logging Manager for Laravel",
     "keywords": [
         "laravel",
         "logging",
